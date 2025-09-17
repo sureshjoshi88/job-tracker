@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/alljob', async (req, res) => {
     try {
         const job = await jobSchema.find()
-        res.status(200).json({ jobs: job })
+        res.status(200).json(job)
     } catch (error) {
         console.log(error);
     }
