@@ -17,6 +17,11 @@ const AllJobs = () => {
   
   return (
     <div>
+      <div>
+        <form action="">
+          <input  className='border-b rounded p-2 outline-0' type="text" placeholder='Enter your Company name' required />
+        </form>
+      </div>
       <div className='grid gap-4 grid-cols-3 '>
         {
           data.map((item,index)=>{
