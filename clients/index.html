@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+    <form action="" id="form">
+        <input id="101" required type="text" placeholder="enter your companyName"><br>
+        <input id="102" required type="text" placeholder="enter your position"><br>
+        <input id="103" required type="text" placeholder="enter your location"><br>
+        <input id="104" required type="text" placeholder="enter your status"><br>
+        <input id="105" required type="text" placeholder="enter your description"><br>
+        <button onclick="addDatda()">add data</button>
+    </form>
+    <script>
+
+        function fetchingData(datas) {
+            let mainDiv = document.getElementById("main")
+            mainDiv.innerHTML += `<div style="border:2px solid blue">
+                <p>${datas.companyName}</p>
+                <p>${datas.position}</p>
+                <p>${datas.location}</p>
+                <p>${datas.status}</p>
+                <p>${datas.description}</p>
+                <p>${datas.appliedDate}</p>
+</div>`
+        }
+        async function mainfunction() {
+             let mainDiv = document.getElementById("main");
+            mainDiv.innerHTML = ''; 
+            await fetch('http://localhost:3000/job/alljob')
+                .then((data) => data.json())
+                .then((resposne) => {
+                    console.log(resposne,);
+                    resposne.jobs.map((item) => {
+                        fetchingData(item)
+
+                    })
+
+                }).catch((err) => {
+                    console.log('something went wrong', err);
+                })
+        }
+        mainfunction()
+
+        function addDatda() {
+
+            let from = document.getElementById("form").addEventListener('click', (e) => {
+                e.preventDefault()
+            })
+            let input1 = document.getElementById("101").value
+            let input2 = document.getElementById("102").value
+            let input3 = document.getElementById("103").value
+            let input4 = document.getElementById("104").value
+            let input5 = document.getElementById("105").value
+
+
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", "Bearer 12345");
+            myHeaders.append("Content-Type", "application/json");
+
+            const formData = {
+                companyName: input1,
+                position: input2,
+                location: input3,
+                status: input4,
+                description: input5
+            }
+
+            const raw = JSON.stringify(formData);
+
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+            };
+
+            fetch("http://localhost:3000/job/addjobpost", requestOptions)
+                .then((response) => response.json())
+                .then((result) => console.log(result), alert("data added"))
+                .catch((error) => console.error(error));
+            mainfunction()
+        }
+
+    </script>
+</body>
+
+</html>
