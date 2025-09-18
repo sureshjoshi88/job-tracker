@@ -7,6 +7,9 @@ const AllJobs = () => {
   const [company,setCompany] = useState('');
   const [position,setPosition] = useState('');
   const [location,setLocation] = useState('');
+  const [status,setStatus] = useState('');
+  const [description,setDescription] = useState('');
+  
   useEffect(()=>{
     fetch('http://localhost:3000/job/alljob')
     .then((data)=>data.json())
