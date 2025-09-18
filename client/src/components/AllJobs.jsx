@@ -4,7 +4,9 @@ import { useEffect } from 'react'
 
 const AllJobs = () => {
   const [data,setData] =useState([])
-  const [company,setCompany] = useState('')
+  const [company,setCompany] = useState('');
+  const [position,setPosition] = useState('');
+  const [location,setLocation] = useState('');
   useEffect(()=>{
     fetch('http://localhost:3000/job/alljob')
     .then((data)=>data.json())
