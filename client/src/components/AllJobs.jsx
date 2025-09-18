@@ -3,64 +3,87 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 const AllJobs = () => {
-  const [data,setData] =useState([])
-  const [company,setCompany] = useState('');
-  const [position,setPosition] = useState('');
-  const [location,setLocation] = useState('');
-  const [status,setStatus] = useState('');
-  const [description,setDescription] = useState('');
+  const [data, setData] = useState([])
+  const [company, setCompany] = useState('');
+  const [position, setPosition] = useState('');
+  const [location, setLocation] = useState('');
+  const [status, setStatus] = useState('');
+  const [description, setDescription] = useState('');
 
-  useEffect(()=>{
-    fetch('http://localhost:3000/job/alljob')
-    .then((data)=>data.json())
-    .then((response)=>{
-      setData(response)
-    }).catch((err)=>{
-      console.log(err);
-    })
-  },[])
+ 
   console.log(data);
-  
-  const handaleform = (e)=>{
+
+  const handaleform = (e) => {
     e.preventDefault();
   }
 
-  const formValues = {
-    companyName:company,
-    position:position,
-    location:location,
-    status:status,
-    description:description
+
+  const handleaddPost = () => {
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer 12345");
+    myHeaders.append("Content-Type", "application/json");
+
+    const formdata = {
+      companyName: company,
+      position: position,
+      location: location,
+      status: status,
+      description: description
+    }
+    const raw = JSON.stringify(formdata);
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:3000/job/addjobpost", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result), alert("data added"))
+      .catch((error) => console.error(error));
+
   }
-  console.log(formValues);
-  
+
+   useEffect(() => {
+    fetch('http://localhost:3000/job/alljob')
+      .then((data) => data.json())
+      .then((response) => {
+        setData(response)
+      }).catch((err) => {
+        console.log(err);
+      })
+  }, [])
+
   return (
     <div>
       <div className='flex justify-center mt-3'>
         <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100' onSubmit={handaleform}>
-          <input  className='border-b rounded p-2 outline-0 w-full' value={company} onChange={(e)=>setCompany(e.target.value)} type="text" placeholder='Enter your Company name' required /><br/>
-          <input  className='border-b rounded p-2 outline-0 w-full' value={position} onChange={(e)=>setPosition(e.target.value)} type="text" placeholder='Enter your Position' required /><br/>
-          <input  className='border-b rounded p-2 outline-0 w-full' value={location} onChange={(e)=>setLocation(e.target.value)
-          } type="text" placeholder='Enter your Location' required /><br/>
-          <select name="" id="" className='border-b rounded p-2 outline-0 w-full' value={status} onChange={(e)=>setStatus(e.target.value)}>
+          <input className='border-b rounded p-2 outline-0 w-full' value={company} onChange={(e) => setCompany(e.target.value)} type="text" placeholder='Enter your Company name' required /><br />
+          <input className='border-b rounded p-2 outline-0 w-full' value={position} onChange={(e) => setPosition(e.target.value)} type="text" placeholder='Enter your Position' required /><br />
+          <input className='border-b rounded p-2 outline-0 w-full' value={location} onChange={(e) => setLocation(e.target.value)
+          } type="text" placeholder='Enter your Location' required /><br />
+          <select name="" id="" className='border-b rounded p-2 outline-0 w-full' value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="applied">Applied</option>
             <option value="pending">Pending</option>
             <option value="reject">Reject</option>
-          </select><br/>
-          <input  className='border-b rounded p-2 outline-0 w-full' value={description} onChange={(e)=>setDescription(e.target.value)} type="text" placeholder='Enter your description' required /><br/>
-          <button className='mt-3 border rounded p-2 w-full'>Add Job</button>
+          </select><br />
+          <input className='border-b rounded p-2 outline-0 w-full' value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder='Enter your description' required /><br />
+          <button className='mt-3  rounded p-2 w-full bg-blue-100' onClick={handleaddPost}>Add Job</button>
         </form>
       </div>
       <div className='grid gap-4 grid-cols-3 mt-5'>
         {
-          data.map((item,index)=>{
-           return <div className='border rounded p-3'>
-                <p>{item.companyName}</p>
-                <p>{item.position}</p>
-                <p>{item.location}</p>
-                <p>{item.status}</p>
-                <p>{item.description}</p>
-                <p>{item.appliedDate}</p>
+          data.map((item, index) => {
+            return <div className='border rounded p-3'>
+              <p>{item.companyName}</p>
+              <p>{item.position}</p>
+              <p>{item.location}</p>
+              <p>{item.status}</p>
+              <p>{item.description}</p>
+              <p>{item.appliedDate}</p>
             </div>
           })
         }
