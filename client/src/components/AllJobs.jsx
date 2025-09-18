@@ -1,4 +1,3 @@
-import { set } from 'mongoose'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -22,10 +21,23 @@ const AllJobs = () => {
   },[])
   console.log(data);
   
+  const handaleform = (e)=>{
+    e.preventDefault();
+  }
+
+  const formValues = {
+    companyName:company,
+    position:position,
+    location:location,
+    status:status,
+    description:description
+  }
+  console.log(formValues);
+  
   return (
     <div>
       <div className='flex justify-center mt-3'>
-        <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100'>
+        <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100' onSubmit={handaleform}>
           <input  className='border-b rounded p-2 outline-0 w-full' value={company} onChange={(e)=>setCompany(e.target.value)} type="text" placeholder='Enter your Company name' required /><br/>
           <input  className='border-b rounded p-2 outline-0 w-full' value={position} onChange={(e)=>setPosition(e.target.value)} type="text" placeholder='Enter your Position' required /><br/>
           <input  className='border-b rounded p-2 outline-0 w-full' value={location} onChange={(e)=>setLocation(e.target.value)
