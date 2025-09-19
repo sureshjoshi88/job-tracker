@@ -45,6 +45,12 @@ const AllJobs = () => {
       .then((result) => console.log(result), alert("data added"))
       .catch((error) => console.error(error));
 
+      setCompany('');
+      setDescription('')
+      setLocation('')
+      setPosition('')
+      setStatus('')
+
   }
 
    useEffect(() => {
