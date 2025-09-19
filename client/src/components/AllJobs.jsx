@@ -45,11 +45,11 @@ const AllJobs = () => {
       .then((result) => console.log(result), alert("data added"))
       .catch((error) => console.error(error));
 
-      setCompany('');
-      setDescription('')
-      setLocation('')
-      setPosition('')
-      setStatus('')
+      // setCompany('');
+      // setDescription('')
+      // setLocation('')
+      // setPosition('')
+      // setStatus('')
 
   }
 
@@ -72,6 +72,8 @@ const AllJobs = () => {
           <input className='border-b rounded p-2 outline-0 w-full' value={location} onChange={(e) => setLocation(e.target.value)
           } type="text" placeholder='Enter your Location' required /><br />
           <select name="" id="" className='border-b rounded p-2 outline-0 w-full' value={status} onChange={(e) => setStatus(e.target.value)}>
+            
+            <option >please select your status</option>
             <option value="applied">Applied</option>
             <option value="pending">Pending</option>
             <option value="reject">Reject</option>
