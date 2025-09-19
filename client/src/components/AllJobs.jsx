@@ -10,9 +10,7 @@ const AllJobs = () => {
   const [status, setStatus] = useState('');
   const [description, setDescription] = useState('');
 
-  const [search,setSearch] = useState('');
-
-  
+  const [search, setSearch] = useState('');
 
 
   console.log(data);
@@ -57,6 +55,26 @@ const AllJobs = () => {
 
   }
 
+  const handleSearch = () => {
+    if(search.trim()===""){
+      alert('please enter a value')
+      return
+    }
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer 12345");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch(`http://localhost:3000/job/alljobs?status=${search}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.error(error));
+  }
+
   useEffect(() => {
     fetch('http://localhost:3000/job/alljob')
       .then((data) => data.json())
@@ -69,8 +87,9 @@ const AllJobs = () => {
 
   return (
     <div>
-      <div className='flex justify-center p-3'> 
-        <input className='border rounded p-1 outline-0 w-100' type="search" name="" id="" placeholder='search with companyname and status' />
+      <div className='flex justify-center p-3'>
+        <input className='border rounded p-1 outline-0 w-100' value={search}  onChange={(e)=>setSearch(e.target.value)} type="search" name="" id="" placeholder='search with status' />
+        <button onClick={handleSearch}>Search</button>
       </div>
       <div className='flex justify-center mt-3'>
         <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100' onSubmit={handaleform}>
