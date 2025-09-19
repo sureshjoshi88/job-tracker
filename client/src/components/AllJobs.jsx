@@ -10,7 +10,11 @@ const AllJobs = () => {
   const [status, setStatus] = useState('');
   const [description, setDescription] = useState('');
 
- 
+  const [search,setSearch] = useState('');
+
+  
+
+
   console.log(data);
 
   const handaleform = (e) => {
@@ -45,15 +49,15 @@ const AllJobs = () => {
       .then((result) => console.log(result), alert("data added"))
       .catch((error) => console.error(error));
 
-      setCompany('');
-      setDescription('')
-      setLocation('')
-      setPosition('')
-      setStatus('')
+    setCompany('');
+    setDescription('')
+    setLocation('')
+    setPosition('')
+    setStatus('')
 
   }
 
-   useEffect(() => {
+  useEffect(() => {
     fetch('http://localhost:3000/job/alljob')
       .then((data) => data.json())
       .then((response) => {
@@ -65,6 +69,9 @@ const AllJobs = () => {
 
   return (
     <div>
+      <div className='flex justify-center p-3'> 
+        <input className='border rounded p-1 outline-0 w-100' type="search" name="" id="" placeholder='search with companyname and status' />
+      </div>
       <div className='flex justify-center mt-3'>
         <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100' onSubmit={handaleform}>
           <input className='border-b rounded p-2 outline-0 w-full' value={company} onChange={(e) => setCompany(e.target.value)} type="text" placeholder='Enter your Company name' required /><br />
@@ -72,7 +79,6 @@ const AllJobs = () => {
           <input className='border-b rounded p-2 outline-0 w-full' value={location} onChange={(e) => setLocation(e.target.value)
           } type="text" placeholder='Enter your Location' required /><br />
           <select name="" id="" className='border-b rounded p-2 outline-0 w-full' value={status} onChange={(e) => setStatus(e.target.value)}>
-            
             <option >please select your status</option>
             <option value="applied">Applied</option>
             <option value="pending">Pending</option>
