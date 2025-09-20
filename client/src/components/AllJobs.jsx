@@ -9,6 +9,7 @@ const AllJobs = () => {
   const [location, setLocation] = useState('');
   const [status, setStatus] = useState('');
   const [description, setDescription] = useState('');
+  const [error,setError] = useState("")
 
   const [search, setSearch] = useState('');
 
@@ -106,6 +107,11 @@ const AllJobs = () => {
           <input className='border-b rounded p-2 outline-0 w-full' value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder='Enter your description' required /><br />
           <button className='mt-3  rounded p-2 w-full bg-blue-100' onClick={handleaddPost}>Add Job</button>
         </form>
+      </div>
+      <div>
+        {
+          data.length===0&&<p className='text-3xl font-medium p-3 text-center'></p>
+        }
       </div>
       <div className='grid gap-4 grid-cols-3 mt-5'>
         {
