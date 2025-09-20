@@ -8,6 +8,7 @@ router.get('/alljob', async (req, res) => {
         res.status(200).json(job)
     } catch (error) {
         console.log(error);
+        res.status(500).json({message:"something went wrong",error:error})
     }
 })
 
@@ -25,7 +26,7 @@ router.get('/alljobs', async (req, res) => {
        
         res.status(200).json(alljob)
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({message:"something went wrong",error:error })
     }
 })
 
@@ -36,6 +37,7 @@ router.post('/addjobpost', async (req, res) => {
         await newjob.save();
         res.status(201).json({ message: "new job is add succesfully", job: newjob })
     } catch (error) {
+        res.status(500).json({message:"something went wrong",error:error})
         console.log(error, "something went wrong");
     }
 })

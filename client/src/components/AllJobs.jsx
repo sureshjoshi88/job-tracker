@@ -46,7 +46,10 @@ const AllJobs = () => {
     fetch("http://localhost:3000/job/addjobpost", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(result), alert("data added"))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error)
+        setError(error.message)
+      });
 
     setCompany('');
     setDescription('')
@@ -77,11 +80,12 @@ const AllJobs = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/job/alljob')
+    fetch('http://localhost:3000/job/alljo')
       .then((data) => data.json())
       .then((response) => {
         setData(response)
       }).catch((err) => {
+        setError(err.message)
         console.log(err);
       })
   }, [])
@@ -110,7 +114,7 @@ const AllJobs = () => {
       </div>
       <div>
         {
-          data.length===0&&<p className='text-3xl font-medium p-3 text-center'></p>
+          data.length===0&&<p className='text-3xl font-medium p-3 text-center'>{error}</p>
         }
       </div>
       <div className='grid gap-4 grid-cols-3 mt-5'>
