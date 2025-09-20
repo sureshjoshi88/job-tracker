@@ -7,8 +7,7 @@ router.get('/alljob', async (req, res) => {
         const job = await jobSchema.find()
         res.status(200).json(job)
     } catch (error) {
-        console.log(error);
-        res.status(500).json({message:"something went wrong",error:error})
+        res.status(500).json({succes:false,message:"Failed to fetch jobs. Please try again later.",error:error.message})
     }
 })
 

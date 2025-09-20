@@ -9,7 +9,7 @@ const AllJobs = () => {
   const [location, setLocation] = useState('');
   const [status, setStatus] = useState('');
   const [description, setDescription] = useState('');
-  const [error,setError] = useState("")
+  const [error, setError] = useState("")
 
   const [search, setSearch] = useState('');
 
@@ -48,7 +48,7 @@ const AllJobs = () => {
       .then((result) => console.log(result), alert("data added"))
       .catch((error) => {
         console.error(error)
-        setError(error.message)
+        // setError(error.message)
       });
 
     setCompany('');
@@ -60,7 +60,7 @@ const AllJobs = () => {
   }
 
   const handleSearch = () => {
-    if(search.trim()===""){
+    if (search.trim() === "") {
       alert('please enter a value')
       return
     }
@@ -80,20 +80,22 @@ const AllJobs = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/job/alljo')
+    fetch('http://localhost:3000/job/alljob')
       .then((data) => data.json())
       .then((response) => {
         setData(response)
       }).catch((err) => {
-        setError(err.message)
-        console.log(err);
+        if(err){
+          setError(err.message);
+        }
+         console.log(err);
       })
   }, [])
 
   return (
     <div>
       <div className='flex justify-center p-3'>
-        <input className='border rounded p-1 outline-0 w-100' value={search}  onChange={(e)=>setSearch(e.target.value)} type="search" name="" id="" placeholder='search with status' />
+        <input className='border rounded p-1 outline-0 w-100' value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="" id="" placeholder='search with status' />
         <button onClick={handleSearch}>Search</button>
       </div>
       <div className='flex justify-center mt-3'>
@@ -114,13 +116,13 @@ const AllJobs = () => {
       </div>
       <div>
         {
-          data.length===0&&<p className='text-3xl font-medium p-3 text-center'>{error}</p>
+          data.length === 0 && <p className='text-3xl font-medium p-3 text-center'>{error}</p>
         }
       </div>
       <div className='grid gap-4 grid-cols-3 mt-5'>
         {
           data.map((item, index) => {
-            return <div className='border rounded p-3'>
+            return <div className='border rounded p-3' key={index}>
               <p>{item.companyName}</p>
               <p>{item.position}</p>
               <p>{item.location}</p>
