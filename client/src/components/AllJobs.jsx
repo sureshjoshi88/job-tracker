@@ -94,9 +94,9 @@ const AllJobs = () => {
 
   return (
     <div>
-      <div className='flex justify-center p-3'>
+      <div className='flex gap-1 justify-center p-3'>
         <input className='border rounded p-1 outline-0 w-100' value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="" id="" placeholder='search with status' />
-        <button onClick={handleSearch}>Search</button>
+        <button className='border rounded p-1 px-2 cursor-pointer' onClick={handleSearch}>Search</button>
       </div>
       <div className='flex justify-center mt-3'>
         <form action="" className='shadow-2xl p-4 rounded space-y-4 w-100' onSubmit={handaleform}>
