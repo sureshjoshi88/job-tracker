@@ -40,4 +40,10 @@ router.post('/addjobpost', async (req, res) => {
         console.log(error, "something went wrong");
     }
 })
+router.patch('/:id',async(req,res)=>{
+    const id = req.params.id;
+    const newValue = await jobSchema.findByIdAndUpdate(id,{status:req.body.status},{new:true})
+    res.status(200).json({message:"success",user:newValue
+    })
+})
 module.exports = router;
