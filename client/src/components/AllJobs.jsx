@@ -48,7 +48,6 @@ const AllJobs = () => {
       .then((result) => console.log(result), alert("data added"))
       .catch((error) => {
         console.error(error)
-        // setError(error.message)
       });
 
     setCompany('');
@@ -76,7 +75,7 @@ const AllJobs = () => {
     fetch(`http://localhost:3000/job/alljobs?status=${search}`, requestOptions)
       .then((response) => response.json())
       .then((result) => setData(result))
-      .catch((error) => console.error(error));
+      .catch((error) => console.log(error));
   }
 
   useEffect(() => {
