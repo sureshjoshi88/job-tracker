@@ -7,7 +7,7 @@ const jobSchema = new mongoose.Schema({
     appliedDate: { type: Date ,default: Date.now() },
     status: { type: String, required: true, enum: ['applied', 'reject', 'pending'],default:"applied" },
     description: { type: String, required: true }
-})
+},{timestamps:true})
 
 
 module.exports = mongoose.model('job', jobSchema)
