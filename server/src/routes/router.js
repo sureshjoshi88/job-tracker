@@ -41,9 +41,17 @@ router.post('/addjobpost', async (req, res) => {
     }
 })
 router.patch('/:id',async(req,res)=>{
-    const id = req.params.id;
-    const newValue = await jobSchema.findByIdAndUpdate(id,{status:req.body.status},{new:true})
-    res.status(200).json({message:"success",user:newValue
-    })
+    try {
+        const id = req.params.id;
+        const newValue = await jobSchema.findByIdAndUpdate(id,{status:req.body.status},{new:true})
+        // if(!newValue){
+        //     res.status(400).json({message:'job not found',status:false});
+        // }
+        res.status(200).json({message:"success",user:newValue
+        })
+        
+    } catch (error) {
+        res.status(500).json({message:"something went wrong",error:error})
+    }
 })
-module.exports = router;
+module.exports = router;    
