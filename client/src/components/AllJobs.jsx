@@ -14,7 +14,6 @@ const AllJobs = () => {
   const [search, setSearch] = useState('');
 
 
-  console.log(data);
 
   const handaleform = (e) => {
     e.preventDefault();

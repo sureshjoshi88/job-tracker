@@ -44,9 +44,6 @@ router.patch('/:id',async(req,res)=>{
     try {
         const id = req.params.id;
         const newValue = await jobSchema.findByIdAndUpdate(id,{status:req.body.status},{new:true})
-        // if(!newValue){
-        //     res.status(400).json({message:'job not found',status:false});
-        // }
         res.status(200).json({message:"success",user:newValue
         })
         
