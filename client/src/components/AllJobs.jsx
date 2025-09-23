@@ -109,7 +109,7 @@ const AllJobs = () => {
             <option value="reject">Reject</option>
           </select><br />
           <input className='border-b rounded p-2 outline-0 w-full' value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder='Enter your description' required /><br />
-          <button className='mt-3  rounded p-2 w-full bg-blue-100' onClick={handleaddPost}>Add Job</button>
+          <button className='mt-3  rounded p-2 w-full bg-blue-100 cursor-pointer' onClick={handleaddPost}>Add Job</button>
         </form>
       </div>
       <div>
@@ -117,7 +117,7 @@ const AllJobs = () => {
           data.length === 0 && <p className='text-3xl font-medium p-3 text-center'>{error}</p>
         }
       </div>
-      <div className='grid gap-4 grid-cols-3 mt-5'>
+      <div className='grid gap-4 grid-cols-3 mt-5 p-2'>
         {
           data.map((item, index) => {
             return <div className='border rounded p-3' key={index}>
