@@ -85,7 +85,13 @@
 
             fetch("http://localhost:3000/job/addjobpost", requestOptions)
                 .then((response) => response.json())
-                .then((result) => console.log(result), alert("data added"))
+                .then((result) => {
+                    console.log(result)
+                    if(result.status){
+                        alert("data added")
+                    }
+                    alert(result.message)
+                    })
                 .catch((error) => console.error(error));
             mainfunction()
         }
