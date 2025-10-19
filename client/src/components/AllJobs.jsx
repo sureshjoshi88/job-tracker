@@ -22,6 +22,9 @@ const AllJobs = () => {
 
   const handleaddPost = () => {
 
+    if(!company||!position||!status||!description){
+      alert("please fill the all input");
+    }
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer 12345");
     myHeaders.append("Content-Type", "application/json");
