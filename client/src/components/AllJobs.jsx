@@ -24,6 +24,7 @@ const AllJobs = () => {
 
     if(!company||!position||!status||!description){
       alert("please fill the all input");
+      return;
     }
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer 12345");
